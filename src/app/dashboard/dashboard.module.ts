@@ -5,6 +5,7 @@ import { TopicCardComponent } from './topic-card/topic-card.component';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { SharedModule} from './../shared/shared.module';
+import { NgclassDemoComponent } from './ngclass-demo/ngclass-demo.component';
 const route: Routes = [
   {
     path: '',
@@ -33,7 +34,7 @@ const route: Routes = [
 @NgModule({
   declarations: [
     DashboardComponent,
-    TopicCardComponent, DashboardHomeComponent
+    TopicCardComponent, DashboardHomeComponent, NgclassDemoComponent
   ],
   imports: [
     CommonModule,
