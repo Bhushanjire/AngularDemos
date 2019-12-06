@@ -17,6 +17,7 @@ class UserRoutes {
         // });
 
         router.post('/createUser', controller.create);
+        router.get('/allUsers', controller.retrive);
 
         // router.post('/substract', function (req: any, res: any) {
         //     let value1 = req.body.value1 ? req.body.value1 : 0;
