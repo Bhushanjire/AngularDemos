@@ -12,21 +12,9 @@ class UserRoutes {
 
     get Routes() {
         const controller = this._UserController;
-        // router.get('/', function (req: any, res: any) {
-        //     res.send('Hello World 12345');
-        // });
-
+    
         router.post('/createUser', controller.create);
-        router.get('/allUsers', controller.retrive);
-
-        // router.post('/substract', function (req: any, res: any) {
-        //     let value1 = req.body.value1 ? req.body.value1 : 0;
-        //     let value2 = req.body.value2 ? req.body.value2 : 0
-        //     let result = {
-        //         "substract": airthmetic.substract(value1, value2)
-        //     }
-        //     res.send(result)
-        // });
+        router.get('/allUsers', controller.retrieve);
         return router;
     }
 }
