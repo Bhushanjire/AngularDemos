@@ -13,7 +13,6 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
     create(item: T, callback: (error: any, result: any) => void) {
         this._model.create(item, callback);
-
     }
 
     retrieve(callback: (error: any, result: any) => void) {
@@ -26,7 +25,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     }
 
     delete(_id: string, callback: (error: any, result: any) => void) {
-        // this._model.remove({ _id: this.toObjectId(_id) }, callback);
+        //  this._model.remove({ _id: this.toObjectId(_id) }, callback);
 
     }
 

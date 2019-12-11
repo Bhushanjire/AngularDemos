@@ -32,10 +32,10 @@ class UserModel {
     }
 
     get createAt(): Date {
-        return this._userModel.createAt;
+        return this._userModel.createdAt;
     }
 
     get updateAt(): Date {
-        return this._userModel.updateAt;
+        return this._userModel.updatedAt;
     }
 }

@@ -17,10 +17,12 @@ class UserController implements IBaseController<any> {
             const user: IUserModel = <IUserModel>request.body;
             const userBusiness = new UserBusiness();
             userBusiness.create(user, (error, result) => {
-                if (error)
+                if (error){
                     responce.status(500).send(Utility.generateResponse(404, error, false, null))
-                else
+                }
+                else{
                     responce.status(200).send(Utility.generateResponse(200, 'User Created', true, result));
+                }
 
             });
         } catch (error) {

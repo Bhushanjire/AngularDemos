@@ -18,8 +18,8 @@ const UserSchema = new Mongoose(
         },
         email: {
             type: String,
-            required: true,
-            trim: true
+            unique : true,
+            required: true
         },
         password: {
             type: String,
@@ -29,11 +29,11 @@ const UserSchema = new Mongoose(
         token: {
             type: String,
         },
-        createAt: {
+        createdAt: {
             type: Date,
             default: Date.now
         },
-        updateAt: {
+        updatedAt: {
             type: Date
         }
     },
@@ -41,8 +41,9 @@ const UserSchema = new Mongoose(
 );
 
 UserSchema.pre("save", function (next) {
-
     console.log("Pre Save Called");
+    next();
+
 });
 
 UserSchema.post("save", function (doc, next) {

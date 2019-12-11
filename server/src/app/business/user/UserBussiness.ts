@@ -10,10 +10,12 @@ class UserBusiness implements IUserBusiness {
 
     create(user: IUserModel, callback: (error: any, result: any) => void) {
         this._UserRepository.create(user, (error, result) => {
-            if (error)
+            if (error){
                 callback(error, null);
-            else
+            }
+            else{
                 callback(null, result);
+            }
         });
     }
 

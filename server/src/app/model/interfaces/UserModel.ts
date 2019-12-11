@@ -6,7 +6,7 @@ interface UserModel extends mongoose.Document {
     email: string;
     password: string;
     token: string;
-    createAt: Date;
-    updateAt: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }
 export = UserModel;
