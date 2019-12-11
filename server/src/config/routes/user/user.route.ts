@@ -1,6 +1,5 @@
 import express = require('express');
 const router = express.Router();
-const airthmetic = require('../../../app/custom-module/airthmetic-opp');
 import UserController = require('../../../controller/User/UserController');
 
 class UserRoutes {
@@ -15,6 +14,10 @@ class UserRoutes {
     
         router.post('/createUser', controller.create);
         router.get('/allUsers', controller.retrieve);
+        router.put('/updateUser', controller.update);
+        router.post('/getUserById', controller.findById);
+        router.delete('/deleteUser', controller.delete);
+        router.post('/login', controller.login);
         return router;
     }
 }

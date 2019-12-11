@@ -8,7 +8,6 @@ class UserRepository extends RepositoryBase<IUserModel>{
     constructor() {
         super(UserSchema);
     }
-
 }
 
 Object.seal(UserRepository);

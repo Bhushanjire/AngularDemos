@@ -20,17 +20,22 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
     }
 
     update(_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
-        this._model.findOneAndUpdate({ _id: _id }, item, { new: true }, callback);
-
+        this._model.findOneAndUpdate({ _id: _id }, item, { new: true, }, callback);
     }
 
     delete(_id: string, callback: (error: any, result: any) => void) {
-        //  this._model.remove({ _id: this.toObjectId(_id) }, callback);
-
+        this._model.findByIdAndRemove({ _id: this.toObjectId(_id) }, callback);
     }
 
     findById(_id: string, callback: (error: any, result: T) => void) {
         this._model.findById(_id, callback);
+    }
+
+    login(username: string, password: string, callback: (error: any, result: any) => void) {
+        this._model.findOne({
+            email: username,
+            password: password
+        }, callback);
     }
 
 

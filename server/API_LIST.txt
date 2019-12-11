@@ -1,0 +1,139 @@
+http://localhost:3000/createUser
+
+Method : POST
+
+{
+"name" : "Test User6",
+"mobileNo" : "9763075620",
+"email": "bhushanjire@rapidera.com",
+"password" : "123456"
+}
+
+{
+    "statusCode": 200,
+    "message": "User Created",
+    "isSuccess": true,
+    "data": {
+        "_id": "5df0b43dda9e394a04c08db2",
+        "name": "Test User6",
+        "mobileNo": "9763075620",
+        "email": "bhushanjire@rapidera.com",
+        "password": "123456",
+        "createdAt": "2019-12-11T09:17:49.366Z",
+        "updatedAt": "2019-12-11T09:17:49.366Z",
+        "__v": 0
+    }
+}
+********************************************************************************************
+http://localhost:3000/allUsers
+
+Method : GET
+
+
+{
+    "statusCode": 200,
+    "message": "All Users",
+    "isSuccess": true,
+    "data": [
+        {
+            "_id": "5df09395c59fcd3d8000687c",
+            "name": "Test User6",
+            "mobileNo": "9763075620",
+            "email": "bhushan@gmail.com",
+            "password": "123456",
+            "createdAt": "2019-12-11T06:58:29.074Z",
+            "updatedAt": "2019-12-11T06:58:29.074Z",
+            "__v": 0
+        },
+        {
+            "_id": "5df0b43dda9e394a04c08db2",
+            "name": "Test User6",
+            "mobileNo": "9763075620",
+            "email": "bhushanjire@rapidera.com",
+            "password": "123456",
+            "createdAt": "2019-12-11T09:17:49.366Z",
+            "updatedAt": "2019-12-11T09:17:49.366Z",
+            "__v": 0
+        }
+    ]
+}
+********************************************************************************************
+
+http://localhost:3000/updateUser
+
+Method : PUT
+
+{
+            "_id": "5df09395c59fcd3d8000687c",
+            "user" :{
+        	"name": "Amol mohite",
+            "mobileNo": "9763075620",
+            "email": "bhushan@gmail.com"
+            }
+          
+        }
+
+        {
+    "statusCode": 200,
+    "message": "User updated",
+    "isSuccess": true,
+    "data": {
+        "_id": "5df09395c59fcd3d8000687c",
+        "name": "Amol mohite",
+        "mobileNo": "9763075620",
+        "email": "bhushan@gmail.com",
+        "password": "123456",
+        "createdAt": "2019-12-11T06:58:29.074Z",
+        "updatedAt": "2019-12-11T11:51:51.497Z",
+        "__v": 0
+    }
+}
+
+********************************************************************************************
+http://localhost:3000/getUserById
+
+Method : POST
+
+{
+	"id" : "5df0b43dda9e394a04c08db2"
+}
+
+    {
+    "statusCode": 200,
+    "message": "User Data",
+    "isSuccess": true,
+    "data": {
+        "_id": "5df0b43dda9e394a04c08db2",
+        "name": "Test User6",
+        "mobileNo": "9763075620",
+        "email": "bhushanjire@rapidera.com",
+        "password": "123456",
+        "createdAt": "2019-12-11T09:17:49.366Z",
+        "updatedAt": "2019-12-11T09:17:49.366Z",
+        "__v": 0
+    }
+}
+
+********************************************************************************************
+http://localhost:3000/deleteUser
+
+{
+	"id" : "5df0dfc8120ac7663a1c395b"
+}
+
+{
+    "statusCode": 200,
+    "message": "User deleted",
+    "isSuccess": true,
+    "data": {
+        "_id": "5df0dfc8120ac7663a1c395b",
+        "name": "Test User6",
+        "mobileNo": "9763075620",
+        "email": "bhushanjire1@rapidera.com",
+        "password": "123456",
+        "createdAt": "2019-12-11T12:23:36.482Z",
+        "updatedAt": "2019-12-11T12:23:36.482Z",
+        "__v": 0
+    }
+}
+********************************************************************************************

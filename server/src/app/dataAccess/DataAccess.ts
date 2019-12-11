@@ -13,14 +13,14 @@ class DataAccess {
         if (this.mongoosInstance)
             return this.mongoosInstance;
         this.mongoosConnection = Mongoose.connection;
-        this.mongoosInstance = Mongoose.connect('mongodb://localhost:27017/collegeDB', { useCreateIndex: true, useNewUrlParser: true });
-
+            this.mongoosInstance = Mongoose.connect('mongodb://localhost:27017/collegeDB', { useCreateIndex: true, useNewUrlParser: true,useFindAndModify: false });
         this.mongoosConnection.once("open", () => {
             console.log("Ready to Operate");
         });
 
         Mongoose.connection.on('connected', () => {
             console.log('Successfully connected: DBURL----');
+
         });
 
         Mongoose.connection.on('error', (err) => {
