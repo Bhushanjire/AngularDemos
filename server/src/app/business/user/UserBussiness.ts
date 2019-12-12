@@ -143,6 +143,7 @@ class UserBusiness implements IUserBusiness {
             this._UserRepository.update(result._id, userDetail, callback);
         });
     }
+    
 }
 
 Object.seal(UserBusiness);

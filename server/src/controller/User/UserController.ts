@@ -11,7 +11,7 @@ import { stringify } from 'querystring';
 
 class UserController implements IBaseController<UserBusiness> {
     // private _responseFormat: IResponceFormat;
- 
+
 
 
     create(request: express.Request, responce: express.Response): void {
@@ -27,7 +27,7 @@ class UserController implements IBaseController<UserBusiness> {
                     }
                 }
                 else {
-                    responce.status(200).send(Utility.generateResponse(200, 'User Created', true, result));
+                    responce.status(200).send(Utility.generateResponse(200, 'Singup successfully', true, 'Please check your email for account verification'));
                 }
 
             });
@@ -42,7 +42,7 @@ class UserController implements IBaseController<UserBusiness> {
             userBusiness.retrieve((error, result) => {
 
                 console.log(error);
-                
+
                 if (error) {
                     responce.status(500).send(Utility.generateResponse(404, error.toString(), false, null));
                 } else {
@@ -51,7 +51,7 @@ class UserController implements IBaseController<UserBusiness> {
             });
         } catch (error) {
             console.log(error);
-            
+
             responce.status(500).send(Utility.generateResponse(404, 'DB error while retriving the users', false, error))
         }
     }
@@ -105,36 +105,39 @@ class UserController implements IBaseController<UserBusiness> {
         }
     }
 
-    login(request: express.Request, responce: express.Response): void{
-        try{
-             let userBusiness = new UserBusiness();
-             userBusiness.login(request.body.username,request.body.password,(error : any,result :any)=>{
+    login(request: express.Request, responce: express.Response): void {
+        try {
+            let userBusiness = new UserBusiness();
+            userBusiness.login(request.body.username, request.body.password, (error: any, result: any) => {
                 if (error) {
                     responce.status(500).send(Utility.generateResponse(404, error.toString(), false, null));
                 } else {
-                    if(result){
+                    if (result) {
                         responce.status(200).send(Utility.generateResponse(200, 'Login successfull', true, result));
-                    }else{
+                    } else {
                         responce.status(200).send(Utility.generateResponse(200, 'Wrong username/password', true, {}));
                     }
                 }
-             });
-        }catch(error){
+            });
+        } catch (error) {
             responce.status(500).send(Utility.generateResponse(404, 'Database user login error', false, error));
         }
     }
 
-    verifyAccount(request: express.Request, responce: express.Response): void{
-        const verificationToken = request.params;        
+    verifyAccount(request: express.Request, responce: express.Response): void {
+        const verificationToken = request.params;
         let userBusiness = new UserBusiness();
-        userBusiness.verifyAccount(verificationToken,(error :any,result:any)=>{
-            if(error){
+        userBusiness.verifyAccount(verificationToken, (error: any, result: any) => {
+            if (error) {
                 responce.status(500).send(Utility.generateResponse(404, error.toString(), false, null));
-            }else{
+            } else {
                 responce.status(200).send(Utility.generateResponse(200, 'Verification Done', true, {}));
-            } 
+            }
         });
     }
+
+   
+
 
 }
 export = UserController;
