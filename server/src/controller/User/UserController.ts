@@ -40,9 +40,6 @@ class UserController implements IBaseController<UserBusiness> {
         try {
             let userBusiness = new UserBusiness();
             userBusiness.retrieve((error, result) => {
-
-                console.log(error);
-
                 if (error) {
                     responce.status(500).send(Utility.generateResponse(404, error.toString(), false, null));
                 } else {
