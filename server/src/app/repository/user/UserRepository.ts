@@ -16,7 +16,11 @@ class UserRepository extends RepositoryBase<IUserModel>{
     }
 
     findByToken(token: string, callback: (error: any, result: IUserModel) => void) {
-        UserSchema.findOne({ token : token }, callback);
+        UserSchema.findOne({ token: token }, callback);
+    }
+
+    verifyAccount(token: string, callback: (error: any, result: IUserModel) => void) {
+        UserSchema.findOne({ verificationToken: token }, callback);
     }
 }
 

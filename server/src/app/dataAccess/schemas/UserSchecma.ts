@@ -6,7 +6,12 @@ let Mongoose = mongoose.Schema;
 
 const UserSchema = new Mongoose(
     {
-        name: {
+        firstName: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        lastName: {
             type: String,
             required: true,
             trim: true
@@ -31,6 +36,19 @@ const UserSchema = new Mongoose(
         },
         token: {
             type: String,
+        },
+        verificationToken:{
+            type: String,
+        },
+        isVerified :{
+            type : Boolean,
+            enum : [true,false],
+            default : false,
+        },
+        status :{
+            type : String,
+            enum : ['Active','Inactive','Deleted'],
+            default : 'Inactive'
         },
         createdAt: {
             type: Date,

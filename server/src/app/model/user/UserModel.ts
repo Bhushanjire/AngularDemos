@@ -11,8 +11,11 @@ class UserModel {
         return this._userModel._id;
     }
 
-    get name(): string {
-        return this._userModel.name;
+    get firstName(): string {
+        return this._userModel.firstName;
+    }
+    get lastName(): string {
+        return this._userModel.lastName;
     }
 
     get mobileNo(): string {
@@ -29,6 +32,14 @@ class UserModel {
 
     get token(): string {
         return this._userModel.token;
+    }
+
+    get isVerified(): boolean {
+        return this._userModel.isVerified;
+    }
+
+    get status(): string {
+        return this._userModel.status;
     }
 
     get createAt(): Date {

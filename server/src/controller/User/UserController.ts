@@ -122,7 +122,18 @@ class UserController implements IBaseController<UserBusiness> {
         }catch(error){
             responce.status(500).send(Utility.generateResponse(404, 'Database user login error', false, error));
         }
+    }
 
+    verifyAccount(request: express.Request, responce: express.Response): void{
+        const verificationToken = request.params;        
+        let userBusiness = new UserBusiness();
+        userBusiness.verifyAccount(verificationToken,(error :any,result:any)=>{
+            if(error){
+                responce.status(500).send(Utility.generateResponse(404, error.toString(), false, null));
+            }else{
+                responce.status(200).send(Utility.generateResponse(200, 'Verification Done', true, {}));
+            } 
+        });
     }
 
 }

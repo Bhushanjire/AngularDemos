@@ -19,6 +19,7 @@ class UserRoutes {
         router.post('/getUserById', ValidateUser.auth,controller.findById);
         router.delete('/deleteUser', ValidateUser.auth,controller.delete);
         router.post('/login', controller.login);
+        router.get('/verifyUserAccount/:verificationToken', controller.verifyAccount);
         return router;
     }
 }

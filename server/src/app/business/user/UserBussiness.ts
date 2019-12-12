@@ -1,6 +1,7 @@
 import IUserBusiness = require('../interfaces/UserBusiness');
 import IUserModel = require('../../model/interfaces/UserModel');
 import UserRepository = require('../../repository/user/UserRepository');
+import CommonHelper = require('../../repository/_helpers/common.helper');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 interface Ihash {
@@ -20,7 +21,35 @@ class UserBusiness implements IUserBusiness {
         const hash = this.saltHashPassword(user.password);
         user.password = hash.password;
         user.salt = hash.salt;
-        this._UserRepository.create(user, callback);
+        this._UserRepository.create(user, (error, result) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                const verificationToken = result.verificationToken = crypto.randomBytes(16).toString('hex')
+                const userDetail = {
+                    _id: result._id,
+                    verificationToken: verificationToken
+                }
+
+                this.updateToken(userDetail, (error: any, result: any) => {
+                    const emailBody = 'Hello,\n\n' + 'Please verify your account by clicking the link:' + 'http://localhost:3000/verifyUserAccount/' + verificationToken + '\n';
+
+                    if (error) {
+                        callback(error, null);
+                    } else {
+                        callback(null, result);
+                    }
+
+                    // CommonHelper.default.sendEmail(result.email, 'Account Verification Email', emailBody, (error, result) => {
+                    //     if (error) {
+                    //         callback(error, null);
+                    //     } else {
+                    //         callback(null, result);
+                    //     }
+                    // });
+                });
+            }
+        });
     }
 
     retrieve(callback: (error: any, result: any) => void) {
@@ -63,14 +92,14 @@ class UserBusiness implements IUserBusiness {
                             password: result.password,
                             token: token
                         }
-                        this.updateToken(userDetail,(error : any,result:any)=>{
-                            if(error){
+                        this.updateToken(userDetail, (error: any, result: any) => {
+                            if (error) {
                                 callback(null, null);
-                            }else{
+                            } else {
                                 callback(null, userDetail)
                             }
                         });
-                        
+
                     } else {
                         callback(null, null);
                     }
@@ -102,8 +131,17 @@ class UserBusiness implements IUserBusiness {
         return encryptedValues;
     }
 
-    updateToken(userDetail : any,callback:(error : any,result:any)=>void){
-        this._UserRepository.update(userDetail._id,userDetail,callback);
+    updateToken(userDetail: any, callback: (error: any, result: any) => void) {
+        this._UserRepository.update(userDetail._id, userDetail, callback);
+    }
+
+    verifyAccount(verificationToken: any, callback: (error: any, result: any) => void) {
+        this._UserRepository.verifyAccount(verificationToken, (error: any, result: any) => {
+            const userDetail: any = {
+                isVerified: true
+            }
+            this._UserRepository.update(result._id, userDetail, callback);
+        });
     }
 }
 
