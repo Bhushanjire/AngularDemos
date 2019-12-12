@@ -31,14 +31,6 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
         this._model.findById(_id, callback);
     }
 
-    login(username: string, password: string, callback: (error: any, result: any) => void) {
-        this._model.findOne({
-            email: username,
-            password: password
-        }, callback);
-    }
-
-
     private toObjectId(_id: string): mongoose.Types.ObjectId {
         return mongoose.Types.ObjectId.createFromHexString(_id)
     }

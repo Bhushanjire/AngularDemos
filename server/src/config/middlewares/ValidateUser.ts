@@ -8,10 +8,10 @@ class ValidateUser {
         const authorizationHeaader = req.headers.authorization;
         if (authorizationHeaader) {
             const token = req.headers.authorization.split(' ')[1];
-            const options = { expiresIn: '1d', issuer: 'my project' };
+            const options = { expiresIn: '1d', issuer: 'myProject' };
 
             try {
-                jwt.verify(token, 'myProject', options, (error: any, result: any) => {
+                jwt.verify(token, 'Bhushan', options, (error: any, result: any) => {
                     if (error) {
                         return res.send(Utility.generateResponse(401, error, false, null));
                     }
@@ -39,6 +39,7 @@ class ValidateUser {
     }
 }
 
-
+Object.seal(ValidateUser);
+export = ValidateUser;
 
 

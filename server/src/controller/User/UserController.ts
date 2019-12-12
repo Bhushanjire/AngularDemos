@@ -112,7 +112,11 @@ class UserController implements IBaseController<UserBusiness> {
                 if (error) {
                     responce.status(500).send(Utility.generateResponse(404, error.toString(), false, null));
                 } else {
-                    responce.status(200).send(Utility.generateResponse(200, 'Login successfull', true, result));
+                    if(result){
+                        responce.status(200).send(Utility.generateResponse(200, 'Login successfull', true, result));
+                    }else{
+                        responce.status(200).send(Utility.generateResponse(200, 'Wrong username/password', true, {}));
+                    }
                 }
              });
         }catch(error){

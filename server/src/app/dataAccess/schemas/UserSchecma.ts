@@ -18,13 +18,16 @@ const UserSchema = new Mongoose(
         },
         email: {
             type: String,
-            unique : true,
+            unique: true,
             required: true
         },
         password: {
             type: String,
             required: true,
             trim: true
+        },
+        salt: {
+            type: String
         },
         token: {
             type: String,

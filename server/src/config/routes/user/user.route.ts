@@ -1,5 +1,6 @@
 import express = require('express');
 const router = express.Router();
+import ValidateUser = require('../../middlewares/ValidateUser');
 import UserController = require('../../../controller/User/UserController');
 
 class UserRoutes {
@@ -13,10 +14,10 @@ class UserRoutes {
         const controller = this._UserController;
     
         router.post('/createUser', controller.create);
-        router.get('/allUsers', controller.retrieve);
-        router.put('/updateUser', controller.update);
-        router.post('/getUserById', controller.findById);
-        router.delete('/deleteUser', controller.delete);
+        router.get('/allUsers', ValidateUser.auth, controller.retrieve);
+        router.put('/updateUser', ValidateUser.auth,controller.update);
+        router.post('/getUserById', ValidateUser.auth,controller.findById);
+        router.delete('/deleteUser', ValidateUser.auth,controller.delete);
         router.post('/login', controller.login);
         return router;
     }
