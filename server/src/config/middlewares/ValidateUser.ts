@@ -6,8 +6,10 @@ import UserBusiness = require('../../app/business/user/UserBussiness');
 class ValidateUser {
     static auth(req: any, res: any, next: any) {
         const authorizationHeaader = req.headers.authorization;
+
         if (authorizationHeaader) {
-            const token = req.headers.authorization.split(' ')[1];
+            // const token = req.headers.authorization.split(' ')[1];
+            const token = req.headers.authorization;
             const options = { expiresIn: '1d', issuer: 'myProject' };
 
             try {

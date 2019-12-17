@@ -2,6 +2,7 @@ import IUserBusiness = require('../interfaces/UserBusiness');
 import IUserModel = require('../../model/interfaces/UserModel');
 import UserRepository = require('../../repository/user/UserRepository');
 import CommonHelper = require('../../repository/_helpers/common.helper');
+import { EROFS } from 'constants';
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 interface Ihash {
@@ -143,7 +144,28 @@ class UserBusiness implements IUserBusiness {
             this._UserRepository.update(result._id, userDetail, callback);
         });
     }
-    
+
+    logout(id: string, callback: (error: any, reult: any) => void) {
+        this._UserRepository.logout(id, (error: any, result: any) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    }
+
+    loggedInUser(token: string, callback: (error: any, reult: any) => void) {
+        this._UserRepository.loggedInUser(token, (error: any, result: any) => {
+            if (error) {
+                callback(error, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    }
+
+
 }
 
 Object.seal(UserBusiness);

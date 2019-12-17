@@ -3,7 +3,7 @@ import express = require('express');
 import IUserModel = require('../../app/model/interfaces/UserModel');
 import UserModel = require('../../app/model/user/UserModel');
 import IBaseController = require('../interfaces/base');
-import  UserBusiness = require('../../app/business/user/UserBussiness');
+import UserBusiness = require('../../app/business/user/UserBussiness');
 import { IResponceFormat } from "../interfaces/comman/ResponceFormat";
 import Utility from '../_helper/utility';
 import User = require('../../app/dataAccess/schemas/UserSchecma');
@@ -133,8 +133,32 @@ class UserController implements IBaseController<UserBusiness> {
         });
     }
 
-   
+    logout(request: express.Request, responce: express.Response): void {
+        const { id } = request.body.id;
+        let userBusiness = new UserBusiness();
+        userBusiness.logout(id, (error: any, result: any) => {
+            if (error) {
+                responce.status(500).send(Utility.generateResponse(404, error.toString(), false, null));
+            } else {
+                responce.status(200).send(Utility.generateResponse(200, 'Logout successfully', true, {}));
+            }
+        });
+    }
 
+    loggedInUser(request: express.Request, responce: express.Response): void {
+        const authorizationHeaader = request.headers.authorization;
+        if (authorizationHeaader) {
+            const token = request.headers.authorization as string;
+            let userBusiness = new UserBusiness();
+            userBusiness.loggedInUser(token, (error: any, result: any) => {
+                if (error) {
+                    responce.status(500).send(Utility.generateResponse(404, error.toString(), false, null));
+                } else {
+                    responce.status(200).send(Utility.generateResponse(200, 'LoggedIn User Details', true, result));
+                }
+            });
 
+        }
+    }
 }
 export = UserController;

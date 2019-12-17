@@ -12,14 +12,16 @@ class UserRoutes {
 
     get Routes() {
         const controller = this._UserController;
-    
+
         router.post('/createUser', controller.create);
         router.get('/allUsers', ValidateUser.auth, controller.retrieve);
-        router.put('/updateUser', ValidateUser.auth,controller.update);
-        router.post('/getUserById', ValidateUser.auth,controller.findById);
-        router.delete('/deleteUser', ValidateUser.auth,controller.delete);
+        router.put('/updateUser', ValidateUser.auth, controller.update);
+        router.post('/getUserById', ValidateUser.auth, controller.findById);
+        router.delete('/deleteUser', ValidateUser.auth, controller.delete);
         router.post('/login', controller.login);
         router.get('/verifyUserAccount/:verificationToken', controller.verifyAccount);
+        router.post('/logout', ValidateUser.auth, controller.logout);
+        router.get('/loggedInUser', ValidateUser.auth, controller.loggedInUser);
         return router;
     }
 }

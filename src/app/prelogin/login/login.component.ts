@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
       if (responce.data) {
         localStorage.setItem('authToken', responce.data.token);
         this._router.navigate(['/dashboard']);
-        console.log('logined');
 
         this._apiService.getRequest('allUsers').subscribe((responce:any) => {
 

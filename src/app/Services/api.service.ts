@@ -7,7 +7,6 @@ import { constant } from 'src/app/core/Config/constant';
   providedIn: 'root'
 })
 export class ApiService {
-
   URL = constant.APIurl;
   httpOptions: any;
   constructor(
@@ -15,43 +14,56 @@ export class ApiService {
   ) { }
 
   ngOnInit() {
-   
+
   }
 
-
   login(data, url) {
-    this.URL += url;
-    return this._httpClient.post(this.URL, data);
+    return this._httpClient.post(this.URL + '' + url, data);
   }
 
   getRequest(url) {
+    let httpHeaderOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('authToken')
+      })
+    };
+    console.log('auth', localStorage.getItem('authToken'));
+
+    return this._httpClient.get(this.URL + '' + url, httpHeaderOptions);
+  }
+
+  postRequest(url, data) {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem('authToken')
       })
     };
-    console.log('http',this.httpOptions);
-    this.URL += url;
-    return this._httpClient.get(url, this.httpOptions);
-  }
-
-  postRequest(url, data) {
-    this.URL += url;
-    return this._httpClient.post(url, data, this.httpOptions);
+    return this._httpClient.post(this.URL + '' + url, data, this.httpOptions);
   }
 
   putRequest(url, data) {
-    this.URL += url;
-    return this._httpClient.put(url, data, this.httpOptions);
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('authToken')
+      })
+    };
+    return this._httpClient.put(this.URL + '' + url, data, this.httpOptions);
   }
 
   deleteRequest(url, data) {
-    this.URL += url;
-    return this._httpClient.delete(url, data);
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('authToken')
+      })
+    };
+    return this._httpClient.delete(this.URL + '' + url, data);
   }
 
   setHeader() {
-   
+
   }
 }
